@@ -145,7 +145,7 @@ export default function Projects() {
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="mb-4 text-lg font-semibold text-slate-800">Request Project Access</h2>
           <p className="mb-4 text-sm text-slate-500">Enter a Project ID to request access from the admin.</p>
-          <form onSubmit={handleManualRequest} className="flex gap-3">
+          <form onSubmit={handleManualRequest} className="flex flex-col gap-3 sm:flex-row">
             <input
               type="text"
               value={requestProjectId}
@@ -156,7 +156,7 @@ export default function Projects() {
             <button
               type="submit"
               disabled={actionLoading || !requestProjectId.trim()}
-              className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-md shadow-indigo-200 transition-all hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-md shadow-indigo-200 transition-all hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               <Send size={14} />
               Request
@@ -169,8 +169,8 @@ export default function Projects() {
       {isAdmin && users.length > 0 && (
         <section>
           <h2 className="mb-4 text-lg font-semibold text-slate-800">Users</h2>
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <table className="w-full">
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <table className="w-full min-w-[480px]">
               <thead>
                 <tr className="border-b border-slate-100 bg-slate-50/50">
                   <th className="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Username</th>
@@ -209,7 +209,7 @@ export default function Projects() {
               {requests.map((req) => (
                 <div
                   key={req.id}
-                  className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md"
+                  className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
                     <p className="text-sm font-medium text-slate-800">

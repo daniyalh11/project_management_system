@@ -72,7 +72,7 @@ export default function Reports() {
       )}
 
       {!loading && projects.length > 0 && (
-        <div className="max-h-[calc(100vh-280px)] space-y-4 overflow-y-auto pr-2">
+        <div className="max-h-[calc(100dvh-280px)] space-y-4 overflow-y-auto pr-1 sm:pr-2">
           {projects.map((project, index) => (
             <div
               key={project.id}
@@ -93,7 +93,7 @@ export default function Reports() {
                 </span>
               </div>
 
-              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 <div className="flex items-center gap-2 text-sm text-slate-500">
                   <MapPin size={14} className="text-slate-400" />
                   <span>{project.location || '—'}</span>

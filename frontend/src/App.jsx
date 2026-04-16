@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
@@ -18,12 +19,15 @@ function ProtectedRoute({ allowedRoles }) {
 }
 
 function DashboardLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-50">
-      <Sidebar />
-      <div className="ml-64">
-        <Navbar />
-        <main className="p-6">
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* On desktop offset by sidebar width; on mobile full width */}
+      <div className="lg:ml-64">
+        <Navbar onMenuClick={() => setSidebarOpen(true)} />
+        <main className="p-4 sm:p-6">
           <Outlet />
         </main>
       </div>

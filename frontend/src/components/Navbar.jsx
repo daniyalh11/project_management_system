@@ -1,21 +1,29 @@
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Menu } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ onMenuClick }) {
   const { user, logout } = useAuth();
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/80 px-6 backdrop-blur-lg">
-      <div>
-        <h2 className="text-lg font-semibold text-slate-800">
-          Welcome back, <span className="text-indigo-600">{user?.username}</span>
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/80 px-4 backdrop-blur-lg sm:px-6">
+      <div className="flex items-center gap-3">
+        {/* Hamburger – mobile only */}
+        <button
+          onClick={onMenuClick}
+          className="rounded-xl p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 lg:hidden"
+          aria-label="Open menu"
+        >
+          <Menu size={20} />
+        </button>
+        <h2 className="text-sm font-semibold text-slate-800 sm:text-base">
+          Welcome, <span className="text-indigo-600">{user?.username}</span>
         </h2>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         {/* Role Badge */}
         <span
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+          className={`hidden items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold sm:inline-flex ${
             user?.role === 'admin'
               ? 'bg-indigo-100 text-indigo-700'
               : 'bg-emerald-100 text-emerald-700'
@@ -30,13 +38,14 @@ export default function Navbar() {
           {user?.username?.charAt(0).toUpperCase()}
         </div>
 
-        {/* Logout */}
+        {/* Logout – icon on mobile, icon+text on desktop */}
         <button
           onClick={logout}
-          className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-500 transition-all hover:bg-red-50 hover:text-red-600"
+          className="flex items-center gap-2 rounded-xl px-2 py-2 text-sm font-medium text-slate-500 transition-all hover:bg-red-50 hover:text-red-600 sm:px-3"
+          aria-label="Logout"
         >
           <LogOut size={16} />
-          Logout
+          <span className="hidden sm:inline">Logout</span>
         </button>
       </div>
     </header>
